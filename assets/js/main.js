@@ -1,28 +1,28 @@
-const table_body_output_id = "tbody_output";
-const table_body_output_elem = document.getElementById(table_body_output_id);
-const input_box_id = "input_box";
-const input_box_elem = document.getElementById(input_box_id);
+const TABLE_BODY_OUTPUT_ID = "tbody_output";
+const TABLE_BODY_OUTPUT_ELEM = document.getElementById(TABLE_BODY_OUTPUT_ID);
+const INPUT_BOX_ID = "input_box";
+const INPUT_BOX_ELEM = document.getElementById(INPUT_BOX_ID);
 
-const cell_key_class = "cell_key";
-const cell_copy_class = "cell_copy";
-const cell_value_class = "cell_value";
+const CELL_KEY_CLASS = "cell_key";
+const CELL_COPY_CLASS = "cell_copy";
+const CELL_VALUE_CLASS = "cell_value";
 
-const cell_copy_btn_text = "Copy";
+const CELL_COPY_BTN_TEXT = "Copy";
 
-const default_url = "https://example.com/page.php?url=http://www.example.test";
+const DEFAULT_URL = "https://example.com/page.php?url=http://www.example.test";
 
 let submitButton = function() {
-  let raw_input = input_box_elem.value;
+  let raw_input = INPUT_BOX_ELEM.value;
 
   if(raw_input) {
     clearTableOutput();
     let url = new URL(raw_input);
     let urlParams = url.searchParams;
 
-    table_body_output_elem.append(buildRow("", url.origin + url.pathname));
+    TABLE_BODY_OUTPUT_ELEM.append(buildRow("", url.origin + url.pathname));
 
     for (let key of urlParams.keys()) {
-      table_body_output_elem.append(buildRow(key, urlParams.get(key)));
+      TABLE_BODY_OUTPUT_ELEM.append(buildRow(key, urlParams.get(key)));
     }
   } else {
     console.log("No URL to parse");
@@ -30,13 +30,13 @@ let submitButton = function() {
 }
 
 let resetButton = function() {
-  input_box_elem.value = "";
+  INPUT_BOX_ELEM.value = "";
   clearTableOutput();
-  input_box_elem.focus();
+  INPUT_BOX_ELEM.focus();
 }
 
 let clearTableOutput = function() {
-  table_body_output_elem.innerHTML = "";
+  TABLE_BODY_OUTPUT_ELEM.innerHTML = "";
 }
 
 let copyClick = function(elem) {
@@ -65,28 +65,28 @@ let buildRow = function(k,v) {
 
 let buildCellKeyTd = function(k) {
   let td_elem = document.createElement("td");
-  td_elem.classList.add(cell_key_class);
+  td_elem.classList.add(CELL_KEY_CLASS);
   td_elem.innerHTML = k;
   return td_elem;
 }
 
 let buildCellCopyTd = function() {
   let td_elem = document.createElement("td");
-  td_elem.classList.add(cell_copy_class);
+  td_elem.classList.add(CELL_COPY_CLASS);
   td_elem.append(buildCellCopyBtn());
   return td_elem;
 }
 
 let buildCellCopyBtn = function() {
   let btn_elem = document.createElement("button");
-  btn_elem.innerHTML = cell_copy_btn_text;
+  btn_elem.innerHTML = CELL_COPY_BTN_TEXT;
   btn_elem.onclick = function(event){copyClick(this)};
   return btn_elem;
 }
 
 let buildCellValueTd = function(v) {
   let td_elem = document.createElement("td");
-  td_elem.classList.add(cell_value_class);
+  td_elem.classList.add(CELL_VALUE_CLASS);
   td_elem.append(buildCellValueTextarea(v));
   return td_elem;
 }
@@ -97,5 +97,5 @@ let buildCellValueTextarea = function(v) {
   return textarea_elem;
 }
 
-input_box_elem.value = default_url;
+INPUT_BOX_ELEM.value = DEFAULT_URL;
 submitButton();
