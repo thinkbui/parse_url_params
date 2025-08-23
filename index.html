@@ -4,41 +4,8 @@
   <head>
     <title>Parse URL Params</title>
     <link rel="shortcut icon"type="image/x-icon" href="data:image/x-icon;,">
-    <style>
-      textarea {
-        width:100%;
-      }
-
-      #input_box {
-        height: 2em;
-      }
-
-      .img_output {
-        height: 100px;
-        width: 100px;
-      }
-
-      table, th, td {
-        border: 1px solid black;
-      }
-
-      table {
-        width: 100%;
-      }
-
-      td {
-        padding: 2px 10px;
-      }
-
-      tbody > tr:nth-child(odd) {
-        background-color: #d2d2d2;
-      }
-
-      .cell_key, .cell_copy {
-        width: 1px;
-        white-space: nowrap;
-      }
-    </style>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
   </head>
 
   <body>
@@ -46,8 +13,8 @@
     <br>
     <textarea id="input_box"></textarea>
     <br>
-    <input type="submit" value="Submit" onclick="submit_button()">
-    <input type="submit" value="Reset" onclick="reset_button()">
+    <input type="submit" value="Submit" onclick="submitButton()">
+    <input type="submit" value="Reset" onclick="resetButton()">
     <hr>
     Output:
     <table>
@@ -61,66 +28,7 @@
       <tbody id="tbody_output">
       </tbody>
     </table>
-    <script>
-      var favIcon = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCBkCLjLM+b2RAAABAUlEQVQoz3XQPyjEcRjH8ddJ5yZ/kkWpm+5MLLLIZLjEYBImI6vJRKY7A6UMMqGru4GUTcoiklm5sGFQCsNlufoZfve7f/J5hm9Pn8/3/TzfL5GSru37VyOePPt2qq3VSsrbsySo1qiiDTH0yOkiK/BhoWqXzQgE0igILLaLoVefSTFUrICYeXMuHZKrwetVNuzTpwHawYnd2k4JeWu2dFvwEgXGq2cYuBU3oaiABiNS2Y5zr5bDNgxc1UYE7tzosOgrutG85IGswHYdGBKOrFf7d8fuXUh5bCT8KCkpyTiTlvJmsJmQkAZxQ8ZM6W8dEWnVplmZ5mdNq/z5yQedkf0L7EFbD7WdJEMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTctMDgtMjVUMDI6NDY6NTArMDI6MDCHFkG6AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE3LTA4LTI1VDAyOjQ2OjUwKzAyOjAw9kv5BgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAASUVORK5CYII=";
-
-      var docHead = document.getElementsByTagName('head')[0];
-      var newLink = document.createElement('link');
-      newLink.rel = 'shortcut icon';
-      newLink.href = 'data:image/png;base64,'+favIcon;
-      docHead.appendChild(newLink);
-
-      var default_url = "https://example.com/page.php?url=http://www.example.test";
-
-      var submit_button = function() {
-        var raw_input = document.getElementById("input_box").value;
-
-        if(raw_input) {
-          var url = new URL(raw_input);
-          var urlParams = new URLSearchParams(new URL(raw_input).search);
-          var myParam = urlParams.get('url');
-          var tbody_output_html = buildRow("",url.origin+url.pathname);
-          for (var key of urlParams.keys()) {
-            tbody_output_html += buildRow(key,urlParams.get(key));
-          }
-          document.getElementById("tbody_output").innerHTML = tbody_output_html;
-        } else {
-          console.log("No URL to parse");
-        }
-      }
-
-      var reset_button = function() {
-        var input_box = document.getElementById("input_box");
-        input_box.value = "";
-        document.getElementById("tbody_output").innerHTML = "";
-        input_box.focus();
-      }
-
-      var copyClick = function(elem) {
-        console.log(elem.parentElement.nextSibling);
-        var copy_textarea = elem.parentElement.nextSibling.getElementsByTagName("textarea")[0];
-        console.log(copy_textarea.value);
-        if (copy_textarea.value) {
-          if(navigator.clipboard) {
-            navigator.clipboard.writeText(copy_textarea.value)
-              .then(function() {console.log("Successfully copied to clipboard.")})
-              .catch(function() {console.log("Could not copy.")});
-          } else {
-            download_list.select();
-            document.execCommand("copy");
-          }
-        } else {
-          console.log("Nothing to copy.");
-        }
-      }
-
-      var buildRow = function(k,v) {
-        return `<tr><td class='cell_key'>${k}</td><td><button onclick='copyClick(this)'>Copy</button></td><td><textarea>${v}</textarea></td></tr>`;
-      }
-
-      document.getElementById("input_box").value = default_url;
-      submit_button();
-    </script>
+    <script src="./assets/js/main.js"></script>
   </body>
 
 </html>
