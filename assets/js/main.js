@@ -1,12 +1,13 @@
-var submit_button = function() {
-  var raw_input = document.getElementById("input_box").value;
+let default_url = "https://example.com/page.php?url=http://www.example.test";
+
+let submit_button = function() {
+  let raw_input = document.getElementById("input_box").value;
 
   if(raw_input) {
-    var url = new URL(raw_input);
-    var urlParams = new URLSearchParams(new URL(raw_input).search);
-    var myParam = urlParams.get('url');
-    var tbody_output_html = buildRow("",url.origin+url.pathname);
-    for (var key of urlParams.keys()) {
+    let url = new URL(raw_input);
+    let urlParams = url.searchParams;
+    let tbody_output_html = buildRow("",url.origin+url.pathname);
+    for (let key of urlParams.keys()) {
       tbody_output_html += buildRow(key,urlParams.get(key));
     }
     document.getElementById("tbody_output").innerHTML = tbody_output_html;
@@ -15,17 +16,15 @@ var submit_button = function() {
   }
 }
 
-var reset_button = function() {
-  var input_box = document.getElementById("input_box");
+let reset_button = function() {
+  let input_box = document.getElementById("input_box");
   input_box.value = "";
   document.getElementById("tbody_output").innerHTML = "";
   input_box.focus();
 }
 
-var copyClick = function(elem) {
-  console.log(elem.parentElement.nextSibling);
-  var copy_textarea = elem.parentElement.nextSibling.getElementsByTagName("textarea")[0];
-  console.log(copy_textarea.value);
+let copyClick = function(elem) {
+  let copy_textarea = elem.parentElement.nextSibling.getElementsByTagName("textarea")[0];
   if (copy_textarea.value) {
     if(navigator.clipboard) {
       navigator.clipboard.writeText(copy_textarea.value)
@@ -40,7 +39,7 @@ var copyClick = function(elem) {
   }
 }
 
-var buildRow = function(k,v) {
+let buildRow = function(k,v) {
   return `<tr><td class='cell_key'>${k}</td><td><button onclick='copyClick(this)'>Copy</button></td><td><textarea>${v}</textarea></td></tr>`;
 }
 
