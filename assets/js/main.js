@@ -80,7 +80,7 @@ let buildCellCopyTd = function() {
 let buildCellCopyBtn = function() {
   let btn_elem = document.createElement("button");
   btn_elem.innerHTML = cell_copy_btn_text;
-  btn_elem.onclick = "copyClick(this)";
+  btn_elem.onclick = function(event){copyClick(this)};
   return btn_elem;
 }
 
