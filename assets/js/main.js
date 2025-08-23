@@ -11,7 +11,7 @@ const cell_copy_btn_text = "Copy";
 
 const default_url = "https://example.com/page.php?url=http://www.example.test";
 
-let submit_button = function() {
+let submitButton = function() {
   let raw_input = input_box_elem.value;
 
   if(raw_input) {
@@ -29,7 +29,7 @@ let submit_button = function() {
   }
 }
 
-let reset_button = function() {
+let resetButton = function() {
   input_box_elem.value = "";
   clearTableOutput();
   input_box_elem.focus();
@@ -98,4 +98,4 @@ let buildCellValueTextarea = function(v) {
 }
 
 input_box_elem.value = default_url;
-submit_button();
+submitButton();
